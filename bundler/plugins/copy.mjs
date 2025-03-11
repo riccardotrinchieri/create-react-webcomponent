@@ -11,21 +11,33 @@ export const copyFilesPlugin = ({ files }) => ({
         outdir = path.dirname(build.initialOptions.outfile);
       }
 
+      function copyDir(srcDir, destDir) {
+        fs.mkdirSync(destDir, { recursive: true });
+        for (const file of fs.readdirSync(srcDir)) {
+          const srcFile = path.resolve(srcDir, file);
+          const destFile = path.resolve(destDir, file);
+          copy(srcFile, destFile);
+        }
+      }
+
+      function copy(src, dest) {
+        const stat = fs.statSync(src);
+        if (stat.isDirectory()) {
+          copyDir(src, dest);
+        } else {
+          fs.copyFileSync(src, dest);
+        }
+      }
+
       files.forEach((file) => {
-        //check if file is dir
         const stats = fs.statSync(file);
         if (stats.isDirectory()) {
           const srcDir = file;
           const destDir = path.join(outdir, path.basename(file));
-          fs.mkdirSync(destDir, { recursive: true });
-          for (const file of fs.readdirSync(srcDir)) {
-            const srcFile = path.resolve(srcDir, file);
-            const destFile = path.resolve(destDir, file);
-            copy(srcFile, destFile);
-          }
+          copyDir(srcDir, destDir);
         } else {
           const dest = path.join(outdir, path.basename(file));
-          fs.copyFileSync(file, dest);
+          copy(file, dest);
         }
       });
     });
