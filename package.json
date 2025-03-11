@@ -1,0 +1,35 @@
+{
+  "name": "create-react-webcomponent",
+  "version": "1.0.0",
+  "description": "Project starter for a React based webcomponent",
+  "main": "index.js",
+  "bin": "./dist/bin.js",
+  "scripts": {
+    "dev": "tsx ./src/main.ts",
+    "build": "node ./bundler/bundler.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riccardotrinchieri/create-react-webcomponent.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/riccardotrinchieri/create-react-webcomponent/issues"
+  },
+  "homepage": "https://github.com/riccardotrinchieri/create-react-webcomponent#readme",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "esbuild": "^0.25.1",
+    "esbuild-plugin-tsc": "^0.5.0",
+    "tsx": "^4.19.3"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.10.0",
+    "@types/yargs": "^17.0.33",
+    "mri": "^1.2.0",
+    "picocolors": "^1.1.1",
+    "uuid": "^11.1.0"
+  }
+}

@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+#{{package_name}}_{{id}} {
+  height: 100%;
+  width: 100%;
+}
